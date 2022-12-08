@@ -20,15 +20,45 @@ public class Reactions {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	@Column(name = "dt_reactions")
 	private Date dataReaction;
+	@Column(name = "tipo_reaction")
 	private Integer tipoReaction;
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "fk_user_id")
 	private Users user;
 	
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "fk_post_id")
 	private Posts post;
+
+	
+	public Reactions() {
+
+	}
+
+	public Reactions(Integer id, Date dataReaction, Integer tipoReaction, Users user, Posts post) {
+
+		this.id = id;
+		this.dataReaction = dataReaction;
+		this.tipoReaction = tipoReaction;
+		this.user = user;
+		this.post = post;
+	}
+	
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
+	public Posts getPost() {
+		return post;
+	}
+	public void setPost(Posts post) {
+		this.post = post;
+	}
+	
 	
 	//GETTERS E SETTERS ID
 	public Integer getId() {

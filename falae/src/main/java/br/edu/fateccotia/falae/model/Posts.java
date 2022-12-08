@@ -1,6 +1,8 @@
 package br.edu.fateccotia.falae.model;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +20,34 @@ public class Posts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;	
+	private Integer id;
+	@Column(name = "dt_post")
 	private Date dataPost;
 	private String post;
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "fk_user_id")
 	private Users user;
+	
+	
+	public Posts() {
+		
+	}
+	
+	public Posts(Integer id, Date dataPost, String post, Users user) {
+		super();
+		this.id = id;
+		this.dataPost = dataPost;
+		this.post = post;
+		this.user = user;
+	}
+	
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
+	
 	
 	//GETTERS E SETTERS ID
 	public Integer getId() {

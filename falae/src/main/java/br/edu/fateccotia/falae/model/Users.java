@@ -22,6 +22,22 @@ public class Users {
 	private String picture;
 	private String status;
 	
+	
+	public Users() {
+		
+	}
+	
+	
+	public Users(Integer id, String email, String senha, String nickname, String picture, String status) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nickname = nickname;
+		this.picture = picture;
+		this.status = status;
+	}
+	
 	//GETTERS E SETTERS ID
 	public Integer getId() {
 		return id;
