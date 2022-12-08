@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateccotia.falae.model.Posts;
-import br.edu.fateccotia.falae.model.Users;
 import br.edu.fateccotia.falae.service.PostService;
-import br.edu.fateccotia.falae.service.UserService;
 
 @RestController
 @RequestMapping("/post")
