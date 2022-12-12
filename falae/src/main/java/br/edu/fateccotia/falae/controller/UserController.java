@@ -1,9 +1,9 @@
 package br.edu.fateccotia.falae.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateccotia.falae.model.Users;
@@ -85,22 +84,40 @@ public class UserController {
         }
     }
 	
-	@GetMapping("/validarSenha")
-	public ResponseEntity<Boolean> validarsenha(@RequestParam String email, String senha){
-
+	@PostMapping("/validarSenha")
+	public ResponseEntity<?> validarsenha(@RequestBody Map<String, String> auth){
+		if(!auth.containsKey("email") || !auth.containsKey("senha")) {
+			return ResponseEntity
+					.status(HttpStatus.UNAUTHORIZED)
+					.header("Content-Type", "application/json")
+					.body("{\"message\": \"email e senha obrigatorio\"}");
+			
+		}
+		String email = auth.get("email");
+		String senha = auth.get("senha");
+        
+		Optional<Users> optUser = userService.findByEmail(email);
 		
-        Optional<Users> optUser = userService.findByEmail(email);
+        
         if (optUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.header("Content-Type", "application/json")
+					.body("{\"message\": \"email ou senha invalido\"}");
         }
-
+        
         Users user = optUser.get();
         boolean valid = encoder.matches(senha, user.getSenha());
-
-        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-        return ResponseEntity.status(status).body(valid);
+        
+        if (!valid) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.header("Content-Type", "application/json")
+					.body("{\"message\": \"email ou senha invalido\"}");
+        }
+      
+        return ResponseEntity.status(HttpStatus.OK)
+				.header("Content-Type", "application/json")
+				.body("{\"message\": \"logado com sucesso\"}");
 		
 	}
-	
 	
 }
