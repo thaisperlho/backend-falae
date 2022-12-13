@@ -23,6 +23,8 @@ public class Posts {
 	private Integer id;
 	@Column(name = "dt_post")
 	private Date dataPost;
+	@Column(name = "model_post")
+	private String modelo;
 	private String post;
 	@ManyToOne
 	@JoinColumn(name = "fk_user_id")
@@ -32,15 +34,19 @@ public class Posts {
 	public Posts() {
 		
 	}
-	
-	public Posts(Integer id, Date dataPost, String post, Users user) {
+
+
+	public Posts(Integer id, Date dataPost, String modelo, String post, Users user) {
 		super();
 		this.id = id;
 		this.dataPost = dataPost;
+		this.modelo = modelo;
 		this.post = post;
 		this.user = user;
 	}
-	
+
+
+
 	public Users getUser() {
 		return user;
 	}
@@ -63,6 +69,15 @@ public class Posts {
 	}
 	public void setDataPost(Date dataPost) {
 		this.dataPost = dataPost;
+	}
+	
+	public String getModelo() {
+		return modelo;
+	}
+
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 	
 	//GETTERS E SETTERS POST
