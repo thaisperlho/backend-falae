@@ -5,7 +5,7 @@
 
 __Criando a imagem Docker do banco Postgres__
 
-O seguinte aquivos:
+O seguinte aquivo:
 - [Dockerfile](Dockerfile)
 
 Para realizarmos o build desse arquivo e criar a imagen:
