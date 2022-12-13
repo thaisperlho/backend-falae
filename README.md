@@ -5,7 +5,7 @@
 
 __Criando a imagem Docker do banco Postgres__
 
-O seguinte aquivo:s
+O seguinte aquivos:
 - [Dockerfile](Dockerfile)
 
 Para realizarmos o build desse arquivo e criar a imagen:
@@ -14,13 +14,13 @@ Para realizarmos o build desse arquivo e criar a imagen:
 docker build -t falae .
 ```
 
-Logo em seguida inicializarmos um container da imagem gerada:
+Logo em seguida inicializaremos um container da imagem gerada:
 
 ```
 docker container run -d --rm -p 5433:5432 --name test_falae_db img-falae
 ```
 
-Pronto temos uma banco com dados que podemos utilizar, para testar a aplicação.
+Pronto! temos uma banco com dados que podemos utilizar para testar a aplicação.
 
 Para fazer um teste podemos verificar no client do Postgres que o banco foi criado e inicializado:
 
