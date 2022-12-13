@@ -1,6 +1,5 @@
 # backend-falae
 
-
 ## Docker
 ---
 
@@ -18,17 +17,41 @@ docker build -t falae .
 Logo em seguida inicializarmos um container da imagem gerada:
 
 ```
-docker run --name db-falae -p 5432:5432 img-falae
+docker container run -d --rm -p 5433:5432 --name test_falae_db img-falae
 ```
 
-Com container rodando podemos da continuar a criacao do Database.
+Pronto temos uma banco com dados que podemos utilizar, para testar a aplicação.
 
-## Criando Databse
+Para fazer um teste podemos verificar no client do Postgres que o banco foi criado e inicializado:
 
-O seguinte script:
-- [Script-falae](script-falae.sql)
+```
+psql -h localhost -U postgres -p 5433  
+```
+Saída do select na tabela posts:
 
-Abra a IDE de banco de dados para utilizacao do Postgres.
+![Icon-app](print-teste-bd.png)
 
-Em seguida execute o script acima e o banco de dados será criado.
+## __Informações importantes para conexão com o banco de dados__
+
+```
+url=jdbc:postgresql://localhost:5433/postgres
+username=postgres
+password=1234
+```
+
+
+Usuarios existentes para teste:
+
+```json
+    "email": "teste@email"
+    "senha": "@senha"
+
+    "email": "teste2@email"
+    "senha": "@senha2"
+```
+
+
+
+
+
 

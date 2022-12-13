@@ -5,7 +5,9 @@ FROM postgres:latest
 ENV POSTGRES_PASSWORD=1234
 
 #Usuario do banco
-ENV POSTGRES_USER=app
+ENV POSTGRES_USER=postgres
 
 #Nome do banco
-ENV POSTGRES_DB=falae
+ENV POSTGRES_DB=postgres
+
+COPY falae-dump.sql /docker-entrypoint-initdb.d/
