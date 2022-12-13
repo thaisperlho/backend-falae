@@ -107,6 +107,7 @@ public class UserController {
         
         Users user = optUser.get();
         boolean valid = encoder.matches(senha, user.getSenha());
+        Integer id = user.getId();
         
         if (!valid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -116,7 +117,8 @@ public class UserController {
       
         return ResponseEntity.status(HttpStatus.OK)
 				.header("Content-Type", "application/json")
-				.body("{\"message\": \"logado com sucesso\"}");
+				.body("{\"message\": \"logado com sucesso\","
+						+ "\"id\": "+ id +"}");
 		
 	}
 	
