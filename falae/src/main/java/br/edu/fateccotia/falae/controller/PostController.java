@@ -1,5 +1,6 @@
 package br.edu.fateccotia.falae.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,17 +17,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fateccotia.falae.model.Posts;
+import br.edu.fateccotia.falae.model.PostsGet;
+import br.edu.fateccotia.falae.model.Reactions;
+import br.edu.fateccotia.falae.model.Users;
 import br.edu.fateccotia.falae.service.PostService;
+import br.edu.fateccotia.falae.service.ReactionsService;
+import br.edu.fateccotia.falae.service.UserService;
 
 @RestController
 @RequestMapping("/post")
 public class PostController {
-	@Autowired
+	
 	private PostService postService;
+	private ReactionsService reactionsService;
+	private UserService userService;
+	
+	
 
+	public PostController(PostService postService, ReactionsService reactionsService, UserService userService) {
+		this.postService = postService;
+		this.reactionsService = reactionsService;
+		this.userService = userService;
+	}
+
+//	@GetMapping
+//	public ResponseEntity<List<Posts>> findALL() {
+//		List<Posts> list = postService.findALL();
+//		return ResponseEntity.ok(list);
+//	}
 	@GetMapping
-	public ResponseEntity<List<Posts>> findALL() {
-		List<Posts> list = postService.findALL();
+	public ResponseEntity<List<PostsGet>> buscaComQtdReaction() {
+		List<PostsGet> list = postService.buscaComQtdReaction();
 		return ResponseEntity.ok(list);
 	}
 
@@ -68,5 +89,26 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
     }
+	
+	@PostMapping("/{idPost}/{tipoReaction}/{idUser}")
+	public ResponseEntity<Reactions> creatReaction(@PathVariable(name = "idPost") Integer idPost,
+			@PathVariable(name = "tipoReaction") Integer tipoReaction,
+			@PathVariable(name = "idUser") Integer idUser) {
+		
+		Optional<Posts> post = this.postService.findById(idPost);
+		Optional<Users> user = this.userService.findById(idUser);
+		
+		
+		Reactions reactions = new Reactions();
+		
+		reactions.setDataReaction(new Date());
+		reactions.setPost(post.get());
+		reactions.setUser(user.get());
+		reactions.setTipoReaction(tipoReaction);
+		
+		this.reactionsService.save(reactions);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(reactions);
+	}
 
 }

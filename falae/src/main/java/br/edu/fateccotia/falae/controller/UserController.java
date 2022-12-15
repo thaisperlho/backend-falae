@@ -1,5 +1,6 @@
 package br.edu.fateccotia.falae.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -85,7 +86,7 @@ public class UserController {
     }
 	
 	@PostMapping("/validarSenha")
-	public ResponseEntity<?> validarsenha(@RequestBody Map<String, String> auth){
+	public ResponseEntity<?>  validarsenha(@RequestBody Map<String, String> auth){
 		if(!auth.containsKey("email") || !auth.containsKey("senha")) {
 			return ResponseEntity
 					.status(HttpStatus.UNAUTHORIZED)
@@ -108,17 +109,22 @@ public class UserController {
         Users user = optUser.get();
         boolean valid = encoder.matches(senha, user.getSenha());
         Integer id = user.getId();
+        String  nickname = user.getNickname();
         
         if (!valid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.header("Content-Type", "application/json")
 					.body("{\"message\": \"email ou senha invalido\"}");
         }
-      
+
+        Map<String, String> body = new HashMap<>();
+        body.put("message", "logado com sucesso");
+        body.put("id", id.toString());
+        body.put("nickname", nickname);
+        
         return ResponseEntity.status(HttpStatus.OK)
 				.header("Content-Type", "application/json")
-				.body("{\"message\": \"logado com sucesso\","
-						+ "\"id\": "+ id +"}");
+				.body(body);
 		
 	}
 	
