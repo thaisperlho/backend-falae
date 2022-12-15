@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.fateccotia.falae.model.Posts;
 import br.edu.fateccotia.falae.model.Reactions;
 import br.edu.fateccotia.falae.repository.ReactionsRepository;
 
@@ -29,4 +30,6 @@ public class ReactionsService {
 	public void delete(Integer id) {
 		reactionsRepository.deleteById(id);
 	}
+	
+	
 }

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "posts")
-public class Posts {
+public class PostsGet {
 	//ATRIBUTO
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,22 +30,27 @@ public class Posts {
 	@ManyToOne
 	@JoinColumn(name = "fk_user_id")
 	private Users user;
+	private Integer gostei;
+	@Column(name = "nao_gostei")
+	private Integer naoGostei;
 	
 	
-	public Posts() {
+	public PostsGet() {
 		
 	}
 
 
-	public Posts(Integer id, Date dataPost, String modelo, String post, Users user) {
+	public PostsGet(Integer id, Date dataPost, String modelo, String post, Users user, Integer gostei,
+			Integer naoGostei) {
 		super();
 		this.id = id;
 		this.dataPost = dataPost;
 		this.modelo = modelo;
 		this.post = post;
 		this.user = user;
+		this.gostei = gostei;
+		this.naoGostei = naoGostei;
 	}
-
 
 
 	public Users getUser() {
@@ -90,6 +95,24 @@ public class Posts {
 		this.post = post;
 	}
 
+	public Integer getGostei() {
+		return gostei;
+	}
+
+
+	public void setGostei(Integer gostei) {
+		this.gostei = gostei;
+	}
+
+
+	public Integer getNaoGostei() {
+		return naoGostei;
+	}
+
+
+	public void setNaoGostei(Integer naoGostei) {
+		this.naoGostei = naoGostei;
+	}
 	
 	
 }

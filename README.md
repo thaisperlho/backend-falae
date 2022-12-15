@@ -1,5 +1,11 @@
 # backend-falae
+## Clonando o projeto
 
+Execute o comando abaixo no terminal:
+
+```
+git clone hhttps://github.com/thaisperlho/backend-falae.git
+```
 ## Docker
 ---
 
@@ -11,7 +17,7 @@ O seguinte aquivo:
 Para realizarmos o build desse arquivo e criar a imagen:
 
 ```
-docker build -t falae .
+docker build -t img-falae .
 ```
 
 Logo em seguida inicializaremos um container da imagem gerada:

@@ -1,6 +1,6 @@
 package br.edu.fateccotia.falae.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,8 +72,8 @@ public class Reactions {
 	public Date getDataReaction() {
 		return dataReaction;
 	}
-	public void setDataReaction(Date dataReaction) {
-		this.dataReaction = dataReaction;
+	public void setDataReaction(Date date) {
+		this.dataReaction = date;
 	}
 	
 	//GETTERS E SETTERS TIPO REACTION
